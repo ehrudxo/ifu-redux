@@ -7,10 +7,10 @@ export default class FeedbackForm extends React.Component{
     return(
       <div className="container">
         <div className="row">
-          <div><h3>{this.props.feedbackRequest.title}</h3></div>
+          <div><h3>{this.props.feedbackProposal.title}</h3></div>
         </div>
         <div className="row">
-          {this.props.feedbackRequest.text}
+          {this.props.feedbackProposal.text}
         </div>
         <div className="row">
           <form onSubmit={this.returnFalse}>

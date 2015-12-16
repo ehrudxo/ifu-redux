@@ -2,14 +2,13 @@
 var fs = require('fs');
 
 class FeedbackFileDao{
-  save(feedback){
+  save(feedback,now){
     let filepath = './storage/'+feedback.token+".irf";
-    let dateString = (new Date()).toString();
     try {
         let stats = fs.lstatSync(filepath);
         if (!stats.isDirectory()) {
           console.log("file exists. append");
-          fs.appendFile(filepath,dateString +"|"+ feedback.text+"\n\r",function(err){
+          fs.appendFile(filepath,now +"|"+ feedback.text+"\n\r",function(err){
             if(err)
               console.error(err);
             console.log('Appended!');
@@ -18,7 +17,7 @@ class FeedbackFileDao{
     }
     catch (e) {
       console.log("new file");
-      fs.writeFile(filepath,dateString +"|"+ feedback.text+"\n\r",function(err){
+      fs.writeFile(filepath,now +"|"+ feedback.text+"\n\r",function(err){
         if(err)
           console.error(err);
         console.log('Written!');

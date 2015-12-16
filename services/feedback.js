@@ -5,8 +5,10 @@ class FeedbackService{
   constructor(){
     this.dao = new DaoImpl();
   }
-  save(feedback){
-    this.dao.save(feedback);
+  saveAndReturn(feedback){
+    let now = (new Date()).toString();
+    this.dao.save(feedback,now);
+    return {"lastUpdated": now,feedback}
   }
   load(){
 
