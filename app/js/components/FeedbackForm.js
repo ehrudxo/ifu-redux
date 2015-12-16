@@ -20,6 +20,7 @@ export default class FeedbackForm extends React.Component{
               e.preventDefault();
               var form = e.target.form;
               var feedbackText = form.querySelector('[name="feedbackText"]').value;
+              console.log(feedbackText);
               this.props.formSubmit(feedbackText);
               return false;
             }}>응답하기</button>

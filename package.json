@@ -25,9 +25,21 @@
     "babel-polyfill": "^6.3.14",
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
+    "isomorphic-fetch": "^2.2.0",
     "object-assign": "^4.0.1",
     "react": "^0.14.3",
-    "react-dom": "^0.14.3"
+    "react-dom": "^0.14.3",
+    "react-redux": "^4.0.1",
+    "redux": "^3.0.5",
+    "redux-devtools": "^3.0.0",
+    "redux-devtools-dock-monitor": "^1.0.1",
+    "redux-devtools-log-monitor": "^1.0.1",
+    "redux-logger": "^2.2.1",
+    "redux-thunk": "^1.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ehrudxo/ifu-redux.git"
   },
   "author": "keen",
   "license": "MIT"

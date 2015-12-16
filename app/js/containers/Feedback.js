@@ -1,10 +1,11 @@
 'use strict'
 import React from 'react';
+import { connect } from 'react-redux';
 import FeedbackForm from '../components/FeedbackForm';
-import {addFeedback} from '../actions'
+import {fetchFeedback} from '../actions'
 import FeedbackFormSubmitted from '../components/FeedbackFormSubmitted';
 
-export default class Feedback extends React.Component{
+class Feedback extends React.Component{
   constructor(){
     super();
     this.token = "RxTxY3cFqwe";
@@ -33,6 +34,7 @@ export default class Feedback extends React.Component{
 
   }
   render(){
+    const {dispatch} = this.props;
     if(this.state.isSubmitted){
       return (
         <FeedbackFormSubmitted {...this.state}/>
@@ -40,9 +42,14 @@ export default class Feedback extends React.Component{
     }else{
       return (
         <FeedbackForm
-        formSubmit={ (text)=>dispatch(addFeedback(text)) }
-        feedbackRequest={this.feedbackRequest}/>
+          formSubmit={(text)=>dispatch(fetchFeedback({
+            "text"  : text,
+            "token" : this.token
+          }))}
+          feedbackRequest={this.feedbackRequest}/>
       )
     }
   }
 }
+
+export default connect()(Feedback);

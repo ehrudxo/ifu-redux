@@ -1,14 +1,22 @@
 import fetch from 'isomorphic-fetch';
 
 export const ADD_FEEDBACK = 'ADD_FEEDBACK';
-function addFeedback(text){
-  return {type: ADD_FEEDBACK, text}
+export function addFeedback(feedback){
+  return {type: ADD_FEEDBACK, feedback}
 }
-function fetchFeedback(text){
+export function fetchFeedback(feedback){
   return dispatch => {
-    dispatch(addFeedback(text));
-    return fetch(`http://www.reddit.com/r/${reddit}.json`)
-      .then(req => req.json())
-      .then(json => dispatch(receivePosts(reddit, json)));
+    console.log(feedback);
+    return fetch('http://localhost:3500/feedback',{
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(feedback)
+      })
+      .then( response => response.json() )
+      .then( feedback => dispatch(addFeedback(feedback)) )
+      .catch( err => console.log(err) );
   }
 }
