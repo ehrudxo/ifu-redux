@@ -5,13 +5,6 @@ export default class FeedbackForm extends React.Component{
   returnFalse (){return false;}
   render(){
     return(
-      <div className="container">
-        <div className="row">
-          <div><h3>{this.props.feedbackProposal.title}</h3></div>
-        </div>
-        <div className="row">
-          {this.props.feedbackProposal.text}
-        </div>
         <div className="row">
           <form onSubmit={this.returnFalse}>
             <textarea name="feedbackText"  className="form-control" rows="3"/>
@@ -20,13 +13,11 @@ export default class FeedbackForm extends React.Component{
               e.preventDefault();
               var form = e.target.form;
               var feedbackText = form.querySelector('[name="feedbackText"]').value;
-              console.log(feedbackText);
               this.props.formSubmit(feedbackText);
               return false;
             }}>응답하기</button>
           </form>
         </div>
-      </div>
     )
   }
 }

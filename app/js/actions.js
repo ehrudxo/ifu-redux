@@ -10,8 +10,8 @@ export function movePage(){
 function receivePosts(feedback, json) {
   return {
     type: RECEIVE_POSTS,
-    feedback,
-    posts: json.feedbacks
+    feedback : feedback,
+    feedbacks : json.feedbacks
   };
 }
 export function fetchFeedback(feedback){
@@ -26,6 +26,7 @@ export function fetchFeedback(feedback){
       })
       .then( response => response.json() )
       .then( json => dispatch(receivePosts(feedback,json)) )
+      .then( ()=> dispatch(movePage()))
       .catch( err => console.log(err) );
   }
 }
