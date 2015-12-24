@@ -1,11 +1,12 @@
 import fetch from 'isomorphic-fetch';
+import { pushPath } from 'redux-simple-router'
+import {Link} from 'react-router';
 
-export const MOVE_PAGE = 'MOVE_PAGE';
-export const FEEDBCK_POST = 'FEEDBCK_POST';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
-
-export function movePage(){
-  return {type: MOVE_PAGE}
+export const MOVE_PAGE = 'MOVE_PAGE';
+function movePage(){
+  console.log("movePage!");
+  window.location.href="/#/w/submitted";
 }
 function receivePosts(feedback, json) {
   return {
@@ -15,7 +16,7 @@ function receivePosts(feedback, json) {
   };
 }
 export function fetchFeedback(feedback){
-  return dispatch => {
+  return (dispatch,getState) => {
     return fetch('http://localhost:3500/feedback',{
         method: 'POST',
         headers: {
@@ -26,7 +27,7 @@ export function fetchFeedback(feedback){
       })
       .then( response => response.json() )
       .then( json => dispatch(receivePosts(feedback,json)) )
-      .then( ()=> dispatch(movePage()))
+      .then( ()=> dispatch(movePage))
       .catch( err => console.log(err) );
   }
 }

@@ -1,23 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux'
+import {fetchFeedback} from '../actions'
 
-export default class FeedbackForm extends React.Component{
+class FeedbackForm extends React.Component{
+  constructor(props){
+    super(props);
+    this.token = "RxTxY3cFqwe";
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
   returnFalse (){return false;}
+  handleSubmit(e){
+    e.preventDefault();
+    const { dispatch } = this.props;
+    dispatch(fetchFeedback({
+      "text"  : this.refs.feedbackText.value,
+      "token" : this.token
+    }));
+
+  }
   render(){
     return(
         <div className="row">
           <form onSubmit={this.returnFalse}>
-            <textarea name="feedbackText"  className="form-control" rows="3"/>
+            <textarea ref="feedbackText"  className="form-control" rows="3"/>
             <br/>
-            <button className="btn btn-primary btn-lg btn-block" onClick={(e)=>{
-              e.preventDefault();
-              var form = e.target.form;
-              var feedbackText = form.querySelector('[name="feedbackText"]').value;
-              this.props.formSubmit(feedbackText);
-              return false;
-            }}>응답하기</button>
+            <a className="btn btn-primary btn-lg btn-block"
+                  to="/w/submitted"
+                  onClick={this.handleSubmit}>응답하기</a>
           </form>
         </div>
     )
   }
 }
+
+export default connect()(FeedbackForm);
